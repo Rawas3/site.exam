@@ -1,0 +1,24 @@
+/*--Section HOME SLIDER--*/
+.carousel-item {
+    height: 600px;
+    overflow: hidden;
+    align-items: center !important;
+}
+
+.carousel-item img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    bottom: 9.25rem;
+    z-index: 1;
+}
+
+.btn.btn-secondary {
+    background: #fda638;
+    border: 1px solid #fda638;
+    color: #fff;
+    border-radius: 40px;
+}
