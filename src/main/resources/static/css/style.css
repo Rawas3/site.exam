@@ -23,4 +23,10 @@ dl, ol, ul {
     max-width: 1480px;
 }
 
+.bread {
+    font-size: 60px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: 800;
+}
 

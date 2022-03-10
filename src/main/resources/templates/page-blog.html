@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
-
 <head th:fragment="head(title)">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,13 +18,9 @@
 
 <body>
 <header th:insert="header :: header"></header>
+<section th:insert="wrapper :: wrapper('My Blog')"></section>
 
-<main>
-    <!--Section HOME SLIDER-->
-
-</main>
 
 
 </body>
 </html>
-

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<!-- Slider section fragment -->
+<div th:fragment="wrapper(heading)">
+
+    <div class="wrapper hero-wrap hero-wrap-2">
+
+        <div class="container-inner">
+            <img class="w-100" th:src="@{/images/dogs.webp}" alt="">
+            <div class="centered">
+                <h1 class="bread" th:text="${heading}"></h1>
+            </div>
+        </div>
+
+        <div class="overlay"></div>
+    </div>
+
+</div>
+</html>>
