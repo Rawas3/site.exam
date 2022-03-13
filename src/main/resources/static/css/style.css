@@ -8,6 +8,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
     font-weight: 600;
     color: #000;
+
 }
 
 a {
@@ -28,5 +29,12 @@ dl, ol, ul {
     color: #fff;
     line-height: 1.2;
     font-weight: 800;
+}
+
+.btn.btn-secondary {
+    background: #fda638;
+    border: 1px solid #fda638;
+    color: #fff;
+    border-radius: 40px;
 }
 

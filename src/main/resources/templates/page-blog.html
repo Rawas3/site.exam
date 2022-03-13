@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
-<head th:fragment="head(title)">
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -13,14 +13,203 @@
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/wrapper.css"/>
-    <title th:text="${title}"></title>
+    <link rel="stylesheet" href="/css/blog.css"/>
+    <title>My blog</title>
 </head>
 
 <body>
 <header th:insert="header :: header"></header>
-<section th:insert="wrapper :: wrapper('My Blog')"></section>
 
+<main>
+    <section th:insert="wrapper :: wrapper('My Blog')"></section>
 
+    <section class="blogs-section bg-light">
+        <div class="container">
+            <div class="row">
 
+                <!--Blogs list-->
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6" th:each="blog : ${blogsPage}">
+                            <div class="blog-entry mb-4" >
+                                <a href="blog-single.html" class="block-20 d-flex align-items-end">
+                                    <img th:src="@{/images/blog/blogs.jpg}"/>
+                                    <div class="meta-date text-center p-2">
+                                        <span class="day">27</span>
+                                        <span class="mos">January</span>
+                                        <span class="yr">2022</span>
+                                    </div>
+                                </a>
+                                <div class="text bg-white p-4">
+                                    <h3 class="heading"><a href="#" th:text="${blog.title}"></a></h3>
+                                    <p th:text="${blog.full_text}"></p>
+                                    <div class="d-flex align-items-center mt-4">
+                                        <p class="mb-0"><a th:href="'/blog/' + ${blog.id}" class="btn btn-secondary">[[#{button.readmore}]]<span
+                                                class="ion-ios-arrow-round-forward"></span></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <nav aria-label="Page navigation" class="d-flex justify-content-center">
+                        <ul class="pagination">
+                            <li class="page-item" th:classappend="${!blogsPage.hasPrevious()} ? disabled">
+                                <a class="page-link"
+                                   th:href="@{/blog?page={pn}&size={size}(pn=${blogsPage.number-1}, size=${blogsPage.size})}"
+                                >[[#{pagenation.previous}]]</a>
+                            </li>
+                            <th:block th:each="pageNumber : ${#numbers.sequence(0, blogsPage.totalPages - 1)}">
+                                <li class="page-item" th:classappend="${blogsPage.number == pageNumber} ? active">
+                                    <a class="page-link"
+                                       th:href="@{/blog?page={pn}&size={size}(pn=${pageNumber}, size=${blogsPage.size})}"
+                                       th:text="${pageNumber + 1}"></a>
+                                </li>
+                            </th:block>
+
+                            <li class="page-item" th:classappend="${!blogsPage.hasNext()} ? disabled">
+                                <a class="page-link"
+                                   th:href="@{/blog?page={pn}&size={size}(pn=${blogsPage.number+1}, size=${blogsPage.size})}"
+                                >[[#{pagenation.next}]]</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!--Sidebar-->
+                <div class="col-sm-4">
+                    <div class="col sidebar-widgets">
+                        <div class="widget-wrap">
+
+                            <!--Search-->
+                            <div class="single-sidebar-widget search-widget">
+                                <form class="search-form" action="#">
+                                    <input placeholder="Search Posts" name="search" type="text"
+                                           onfocus="this.placeholder = ''"
+                                           onblur="this.placeholder = 'Search Posts'">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+
+                            <!--Blogs writer-->
+                            <div class="single-sidebar-widget user-info-widget">
+                                <img th:src="@{/images/blog/bloger.jpg}" alt="admin">
+                                <a href="#"><h4>Dr. Bull Terrier</h4></a>
+                                <p>
+                                    Senior blog writer
+                                </p>
+                                <p>
+                                    Boot camps have its supporters andit sdetractors. Some people do not understand
+                                    why you should have to spend money on boot camp when you can get. Boot camps have
+                                    itssuppor ters andits detractors.
+                                </p>
+                            </div>
+
+                            <!--Popular Posts-->
+                            <div class="single-sidebar-widget popular-post-widget">
+                                <h4 class="blogs-sidebar-title">Popular Posts</h4>
+                                <div class="popular-post-list">
+
+                                    <div class="single-post-list d-flex flex-row align-items-center">
+                                        <div class="thumb">
+                                            <img class="img-fluid"
+                                                 th:src="@{/images/blog/sidebar_1.jpg}">
+                                        </div>
+                                        <div class="details">
+                                            <a href="https://www.ozon.ru/product/nastolnaya-igra-sobaka-kusaka-27156240/?sh=oPWzuwAAAA" target="_blank">
+                                                <h6 class="mb-2">Space The Final Frontier</h6></a>
+                                            <p class="mb-0">02 Hours ago</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="single-post-list d-flex flex-row align-items-center">
+                                        <div class="thumb">
+                                            <img class="img-fluid"
+                                                 th:src="@{/images/blog/sidebar_2.jpg}">
+                                        </div>
+                                        <div class="details">
+                                            <a href="https://happydog-petfood.com/" target="_blank">
+                                                <h6 class="mb-2">Happy Dog premium dog food</h6></a>
+                                            <p class="mb-0">02 Hours ago</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="single-post-list d-flex flex-row align-items-center">
+                                        <div class="thumb">
+                                            <img class="img-fluid"
+                                                 th:src="@{/images/blog/sidebar_3.jpg}">
+                                        </div>
+                                        <div class="details">
+                                            <a href="https://nationaltoday.com/doggy-date-night/" target="_blank">
+                                                <h6 class="mb-2">National Doggy Date Nigh</h6></a>
+                                            <p class="mb-0">02 Hours ago</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="single-post-list d-flex flex-row align-items-center">
+                                        <div class="thumb">
+                                            <img class="img-fluid"
+                                                 th:src="@{/images/blog/sidebar_4.jpg}">
+                                        </div>
+                                        <div class="details">
+                                            <a href="https://store.usps.com/store/product/stamp-gifts/us-mail-carrier-dog-costume-P_843201" target="_blank">
+                                                <h6 class="mb-2">U.S. Mail Carrier Dog</h6></a>
+                                            <p class="mb-0">02 Hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Post categories-->
+                            <div class="single-sidebar-widget post-category-widget">
+                                <h4 class="blogs-sidebar-title">Post Catgories</h4>
+                                <ul class="category-list">
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Technology</p>
+                                            <p>37</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Lifestyle</p>
+                                            <p>24</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Fashion</p>
+                                            <p>59</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Art</p>
+                                            <p>29</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="d-flex justify-content-between">
+                                            <p>Food</p>
+                                            <p>15</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+</main>
+
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="mb-1">[[#{footer.text}]]</p>
+        <p class="mb-0">[[#{footer.text.read}]]</p>
+    </div>
+</footer>
 </body>
 </html>

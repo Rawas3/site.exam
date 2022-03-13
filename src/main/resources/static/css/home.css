@@ -15,10 +15,3 @@
     bottom: 9.25rem;
     z-index: 1;
 }
-
-.btn.btn-secondary {
-    background: #fda638;
-    border: 1px solid #fda638;
-    color: #fff;
-    border-radius: 40px;
-}
