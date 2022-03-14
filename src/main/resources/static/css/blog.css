@@ -1,3 +1,15 @@
+
+.blog-edit-section .container{
+    max-width: 700px;
+}
+
+.blog-edit-section img {
+    max-width: 400px;
+}
+
+.img-fluid {
+    max-width: 400px;
+}
 .blogs-section {
     padding: 7em 0;
     position: relative;

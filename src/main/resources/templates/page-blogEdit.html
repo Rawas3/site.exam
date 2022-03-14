@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<head th:replace="head :: head('Edit blog')"></head>
+
+<body>
+<header th:insert="header :: header"></header>
+<section th:insert="wrapper :: wrapper(#{blogpage.wrapper})"></section>
+
+<section class="blog-edit-section">
+    <div class="container mt-5 mb-5">
+        <h1>[[#{blogpage.blog.correction}]]</h1>
+        <div th:each="element : ${blog}">
+            <form th:method="post">
+                <input type="hidden" class="form-control" name="_csrf" th:value="${_csrf.token}"><br>
+                <img th:src="@{${blog.photosImagePath}}"/>
+                <div class="mt-3 mb-3">
+                    <input type="file" name="image" accept="image/png, image/jpeg"/>
+                </div>
+                <input type="text" class="form-control" name="title" placeholder="Iveskite straipsnio pavadinima"
+                       th:value="${blog.title}"><br>
+                <textarea class="form-control" name="full_text" placeholder="Iveskite straipsnio teksta"
+                          th:text="${blog.full_text}"/><br>
+                <button type="submit" class="btn btn-success">Atnaujinti</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="mb-1">"All rights reserved"</p>
+        <p class="mb-0">© 2022 Dog House</p>
+    </div>
+</footer>
+</body>
+</html>

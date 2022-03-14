@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head('Blog details')"></head>
+
+<body>
+<header th:insert="header :: header"></header>
+<section th:insert="wrapper :: wrapper('Post details')"></section>
+
+
+<section class="blogs-section bg-light">
+    <div class="container" th:each="el : ${blog}">
+        <div class="row" >
+            <div class="col-lg-8">
+                <h2 class="mb-3" th:text="${blog.title}"/>
+                <img class="img-fluid md-4" th:src="@{${blog.photosImagePath}}"/>
+                <p class="mt-5" th:text="${blog.full_text}"/>
+
+                <p>
+                    <a th:href="'/blog/' + ${blog.id} +'/edit'" class="btn btn-warning">Taisyti</a>
+                <form th:action="'/blog/' + ${blog.id} +'/remove'" metod="post">
+                    <button class="btn btn-warning" type="submit">Istrinti</button>
+                </form>
+                </p>
+
+                <div class="pt-5 mt-5">
+                    <div class="comment-form-wrap pt-5">
+                        <h3 class="mb-3 h4 font-weight-bold">Leave a comment</h3>
+                        <form action="#" class="p-5 bg-light">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="website">Website</label>
+                                <input type="url" class="form-control" id="website">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Post Comment" class="btn btn-secondary mt-4">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--Sidebar-->
+            <div class="col-sm-4">
+                <div class="col sidebar-widgets">
+                    <div class="widget-wrap">
+
+                        <!--Search-->
+                        <div class="single-sidebar-widget search-widget">
+                            <form class="search-form" action="#">
+                                <input placeholder="Search Posts" name="search" type="text"
+                                       onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Search Posts'">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+
+                        <!--Blogs writer-->
+                        <div class="single-sidebar-widget user-info-widget">
+                            <img th:src="@{/images/blog/bloger.jpg}" alt="admin">
+                            <a href="#"><h4>Dr. Bull Terrier</h4></a>
+                            <p>
+                                Senior blog writer
+                            </p>
+                            <p>
+                                Boot camps have its supporters andit sdetractors. Some people do not understand
+                                why you should have to spend money on boot camp when you can get. Boot camps have
+                                itssuppor ters andits detractors.
+                            </p>
+                        </div>
+
+                        <!--Popular Posts-->
+                        <div class="single-sidebar-widget popular-post-widget">
+                            <h4 class="blogs-sidebar-title">Popular Posts</h4>
+                            <div class="popular-post-list">
+
+                                <div class="single-post-list d-flex flex-row align-items-center">
+                                    <div class="thumb">
+                                        <img class="img-fluid"
+                                             th:src="@{/images/blog/sidebar_1.jpg}">
+                                    </div>
+                                    <div class="details">
+                                        <a href="https://www.ozon.ru/product/nastolnaya-igra-sobaka-kusaka-27156240/?sh=oPWzuwAAAA" target="_blank">
+                                            <h6 class="mb-2">Space The Final Frontier</h6></a>
+                                        <p class="mb-0">02 Hours ago</p>
+                                    </div>
+                                </div>
+
+                                <div class="single-post-list d-flex flex-row align-items-center">
+                                    <div class="thumb">
+                                        <img class="img-fluid"
+                                             th:src="@{/images/blog/sidebar_2.jpg}">
+                                    </div>
+                                    <div class="details">
+                                        <a href="https://happydog-petfood.com/" target="_blank">
+                                            <h6 class="mb-2">Happy Dog premium dog food</h6></a>
+                                        <p class="mb-0">02 Hours ago</p>
+                                    </div>
+                                </div>
+
+                                <div class="single-post-list d-flex flex-row align-items-center">
+                                    <div class="thumb">
+                                        <img class="img-fluid"
+                                             th:src="@{/images/blog/sidebar_3.jpg}">
+                                    </div>
+                                    <div class="details">
+                                        <a href="https://nationaltoday.com/doggy-date-night/" target="_blank">
+                                            <h6 class="mb-2">National Doggy Date Nigh</h6></a>
+                                        <p class="mb-0">02 Hours ago</p>
+                                    </div>
+                                </div>
+
+                                <div class="single-post-list d-flex flex-row align-items-center">
+                                    <div class="thumb">
+                                        <img class="img-fluid"
+                                             th:src="@{/images/blog/sidebar_4.jpg}">
+                                    </div>
+                                    <div class="details">
+                                        <a href="https://store.usps.com/store/product/stamp-gifts/us-mail-carrier-dog-costume-P_843201" target="_blank">
+                                            <h6 class="mb-2">U.S. Mail Carrier Dog</h6></a>
+                                        <p class="mb-0">02 Hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Post categories-->
+                        <div class="single-sidebar-widget post-category-widget">
+                            <h4 class="blogs-sidebar-title">Post Catgories</h4>
+                            <ul class="category-list">
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Technology</p>
+                                        <p>37</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Lifestyle</p>
+                                        <p>24</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Fashion</p>
+                                        <p>59</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Art</p>
+                                        <p>29</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex justify-content-between">
+                                        <p>Food</p>
+                                        <p>15</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="mb-1">"All rights reserved"</p>
+        <p class="mb-0">© 2022 Dog House</p>
+    </div>
+</footer>
+
+</body>
+</html>

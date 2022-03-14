@@ -10,9 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -30,7 +28,7 @@ public class BlogController {
 
     @GetMapping("/blog")
     public String blogMain(Model model,
-                           @PageableDefault(size = 6, sort = {"id"}, direction = Sort.Direction.ASC) Pageable page) {
+                           @PageableDefault(size = 4, sort = {"id"}, direction = Sort.Direction.ASC) Pageable page) {
         model.addAttribute("blogsPage", blogService.getProductsPaginated(page));
         return "page-blog";
     }
@@ -58,6 +56,29 @@ public class BlogController {
         return "redirect:/blog";
     }
 
+    @GetMapping("/blog/{id}")
+    public String blogDetails(@PathVariable(value = "id") long id, Model model) {
+        model.addAttribute("blog", blogService.getBlog(id));
+        return "page-blogDetails";
+    }
+
+    @GetMapping("/blog/{id}/edit")
+    public String blogEdit(@PathVariable(value = "id") long id, Model model) {
+        model.addAttribute("blog", blogService.getBlog(id));
+        return "page-blogEdit";
+    }
+
+    @PostMapping("/blog/{id}/edit")
+    public String blogPostUpdate(Model model, Blog blog) {
+        blogService.saveBlog(blog);
+        return "redirect:/blog";
+    }
+
+    @RequestMapping("/blog/{id}/remove")
+    public String blogPostDelete(@PathVariable(value = "id") long id, Model model) {
+        blogService.deleteBlog(id);
+        return "redirect:/blog";
+    }
 
 
 }
