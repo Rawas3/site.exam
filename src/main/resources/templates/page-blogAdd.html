@@ -21,16 +21,25 @@
 <header th:insert="header :: header"></header>
 <section th:insert="wrapper :: wrapper('Add post')"></section>
 
+<section>
+    <div class="container mt-5 mb-5">
+        <h1>Prideti straipsni</h1>
+        <form action="/blog/add" th:method="post" enctype="multipart/form-data">
+            <input type="hidden" th:value="${_csrf.token}" name="_csrf" class="form-control"><br>
+            <input type="text" name="title" placeholder="Iveskite straipsnio pavadinima" class="form-control"><br>
+            <textarea class="form-control" name="full_text" placeholder="Iveskite straipsnio teksta"></textarea><br>
+            <input type="file" name="image" accept="image/png, image/jpeg" />
+            <button type="submit" class="btn btn-success">Prideti</button>
+        </form>
+    </div>
 
-<div class="container mt-5 mb-5">
-    <h1>Prideti straipsni</h1>
-    <form action="/blog/add" th:method="post" enctype="multipart/form-data">
-        <input type="hidden" th:value="${_csrf.token}" name="_csrf" class="form-control"><br>
-        <input type="text" name="title" placeholder="Iveskite straipsnio pavadinima" class="form-control"><br>
-        <textarea class="form-control" name="full_text" placeholder="Iveskite straipsnio teksta"></textarea><br>
-        <input type="file" name="file">
-        <button type="submit" class="btn btn-success">Prideti</button>
-    </form>
-</div>
+</section>
+
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="mb-1">"All rights reserved"</p>
+        <p class="mb-0">© 2022 Dog House</p>
+    </div>
+</footer>
 </body>
 </html>

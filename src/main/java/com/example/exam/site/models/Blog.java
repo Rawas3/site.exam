@@ -19,5 +19,12 @@ public class Blog {
     private Long id;
     private String title;
     private String full_text;
+    private String photos;
+
+    @Transient
+    public String getPhotosImagePath () {
+        if (photos == null || id == null) return null;
+        return "/blog-photos/" + id + "/" +photos;
+    }
 
 }

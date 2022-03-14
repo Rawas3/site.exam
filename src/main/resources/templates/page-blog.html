@@ -33,7 +33,7 @@
                         <div class="col-md-6 col-lg-6" th:each="blog : ${blogsPage}">
                             <div class="blog-entry mb-4" >
                                 <a href="blog-single.html" class="block-20 d-flex align-items-end">
-                                    <img th:src="@{/images/blog/blogs.jpg}"/>
+                                    <img th:src="@{${blog.photosImagePath}}"/>
                                     <div class="meta-date text-center p-2">
                                         <span class="day">27</span>
                                         <span class="mos">January</span>
@@ -57,7 +57,7 @@
                             <li class="page-item" th:classappend="${!blogsPage.hasPrevious()} ? disabled">
                                 <a class="page-link"
                                    th:href="@{/blog?page={pn}&size={size}(pn=${blogsPage.number-1}, size=${blogsPage.size})}"
-                                >[[#{pagenation.previous}]]</a>
+                                >[[#{pagination.previous}]]</a>
                             </li>
                             <th:block th:each="pageNumber : ${#numbers.sequence(0, blogsPage.totalPages - 1)}">
                                 <li class="page-item" th:classappend="${blogsPage.number == pageNumber} ? active">
@@ -70,7 +70,7 @@
                             <li class="page-item" th:classappend="${!blogsPage.hasNext()} ? disabled">
                                 <a class="page-link"
                                    th:href="@{/blog?page={pn}&size={size}(pn=${blogsPage.number+1}, size=${blogsPage.size})}"
-                                >[[#{pagenation.next}]]</a>
+                                >[[#{pagination.next}]]</a>
                             </li>
                         </ul>
                     </nav>
@@ -207,8 +207,8 @@
 
 <footer class="text-muted py-5">
     <div class="container">
-        <p class="mb-1">[[#{footer.text}]]</p>
-        <p class="mb-0">[[#{footer.text.read}]]</p>
+        <p class="mb-1">"All rights reserved"</p>
+        <p class="mb-0">© 2022 Dog House</p>
     </div>
 </footer>
 </body>
